@@ -1,0 +1,225 @@
+'''
+f = open('1_ext_file','r')
+new = open("my_new_file", 'w')
+
+decimal = input('Enter Decimal number: ')
+decimal = float(decimal)
+
+sum = decimal + 42
+
+for line in f.readlines():
+    new.write(line)
+
+decimal = str(decimal)
+sum = str(sum)
+new.write(decimal + '\n')
+new.write(sum)
+new.close()
+
+
+out=open("my_new_file", 'r')
+lines=out.readlines()
+out.close()
+assert len(lines)==7
+number = float(lines[6])-float(lines[5])
+assert number == 42
+
+
+
+f = open("1_ext_file", 'r')
+mean = open("1_ext_file.e2",'w')
+
+numbers=[]
+for line in f.readlines():
+    line = float(line)
+    numbers.append(line)
+
+
+s = sum(numbers)
+m = s/len(numbers)
+m = str(m)
+
+mean.write(m)
+mean.close()
+
+
+
+
+
+import numpy as np
+file_in=open("1_ext_file", 'r')
+lines=file_in.readlines()
+file_in.close()
+lines_n=[]
+for i in range(len(lines)):
+    lines_n.append(float(lines[i]))
+svalue=np.mean(lines_n)
+file_in2=open("1_ext_file.e2", 'r')
+line=file_in2.readline()
+file_in2.close()
+assert round(float(line[:]),3) == round(svalue,3)
+
+
+f2 = open('2_f', 'r')
+g2 = open('2_g', 'r')
+
+listf2=[]
+listg2=[]
+
+for line in f2.readlines():
+    line = float(line)
+    listf2.append(line)
+
+for line in g2.readlines():
+    line = float(line)
+    listg2.append(line)
+
+listh2 = listg2 + listf2
+listh2 = sorted(listh2)
+listh2 = str(listh2)
+
+h2 = open('2_h' ,'w')
+h2.write(listh2)
+h2.close()
+
+
+
+hread = open("2_h", 'r')
+
+lines = hread.readlines()
+
+for i in range(len(lines) - 1):
+    assert int(lines[i]) < int(lines[i + 1])
+
+hread.close()
+
+
+
+
+text = open("3_given_file_story", "r")
+output = open('3_output', 'w')
+
+str_list = []
+for line in text.readlines():
+    str_list.append(line.rstrip())
+
+del str_list[1] #Empty Line
+
+string = str_list[0] + str_list[1]
+
+l = len(string)
+max_len = 70
+
+for i in range(0,l,max_len):
+    split_line = string[i:i + max_len]
+    print(split_line)
+    output.write(split_line + '\n')
+
+output.close()
+
+
+output_file = open("3_output", 'r')
+lines=output_file.readlines()
+assert len(lines)==6
+for i in range(len(lines)):
+    assert len(lines[i]) <= 70
+assert lines[4].split()[0]=='Now'
+output_file.close()
+'''
+
+
+
+
+
+#Fibbonacci Seq
+
+output = open('exercise_4.output', 'w')
+
+n = 20
+fib = []
+for i in range(n):
+    if i == 0:
+        m = 0
+    elif i == 1:
+        m = 1
+    else:
+        m = fib[i-1] + fib[i-2]
+    fib.append(m)
+    m = str(m)
+    output.write(m + '\n')
+output.close()
+
+
+#If the Fibonacci sequence is correct, then
+#the sum of the n numbers is equal to the (n+2)th number minus 1
+output_file = open("exercise_4.output", 'r')
+lines = output_file.readlines()
+listn = []
+for i in range(len(lines)):
+    listn.append(int(lines[i]))
+tot_sum = sum(listn)
+npo = listn[len(listn)-1]+listn[len(listn)-2]
+npp = npo+listn[len(listn)-1]
+final_test = npp-1
+assert tot_sum == final_test
+output_file.close()
+
+'''
+import math
+
+data = open('Laurdan_0_va.log','r')
+output = open("Exercise_5_output",'w')
+values = []
+mean = 0
+n = 0
+for line in data.readlines():
+    if 'Sum of electronic and thermal Enthalpies' in line:
+        value = float(line[53:])
+        value = round(value,2)
+        values.append(value)
+        mean = mean + value
+        value = str(value)
+        output.write(value + '\n')
+        n += 1
+
+mean = mean/n
+mean = round(mean,2)
+mean = str(mean)
+output.write(mean)
+output.close()
+
+
+
+import numpy as np
+Wf=open("Exercise_5_output",'r')
+lines = Wf.readlines()
+tot_num=len(lines)
+assert len(lines) == 26
+for i in range(len(lines)):
+    number_out = lines[i][lines[i].find(".")+1:]
+    assert int(number_out) < 100
+newlist=[]
+for i in range(len(lines)-1):
+    newlist.append(round(float(lines[i]),2))
+ave=np.mean(newlist)
+assert round(ave,2) == round(float(lines[len(lines)-1]),2)
+Wf.close()
+'''
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

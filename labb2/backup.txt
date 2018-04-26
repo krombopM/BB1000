@@ -1,0 +1,32 @@
+import math
+
+
+class Vector3D(object):
+    def __init__(self, x, y, z):
+        self.vector = [x, y, z]
+        self.coordX = x
+        self.coordY = y
+        self.coordZ = z
+        print(self.vector)
+
+    def length(self):
+        l = math.sqrt((self.coordX**2) + (self.coordY**2) + (self.coordZ**2))
+        return(l)
+
+    def norm(self):
+        l = self.length()
+        self.coordX = self.coordX/l
+        self.coordY= self.coordY/l
+        self.coordZ = self.coordZ/l
+
+
+    def __add__(self, other):
+        x, y, z = self.vector
+        x2, y2, z2 = other.vector
+        return Vector3D(x+x2, y+y2, z+z2)
+
+
+    def __sub__(self, other):
+        x ,y, z = self.vector
+        x2, y2, z2 = other.vector
+        return Vector3D(x-x2, y-y2, z-z2)
