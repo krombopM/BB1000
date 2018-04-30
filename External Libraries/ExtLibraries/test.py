@@ -31,16 +31,21 @@ plt.savefig('donaldplot.png')
 
 
 from biopandas.pdb import PandasPdb
-import matplotlib.pyplot as plt
-import pandas as pd
-
+import numpy as np
 ppdb = PandasPdb().fetch_pdb('3IE9')
 new_file = open('3IE9.extra_info', 'w')
 heatatmdf = ppdb.df['HETATM']
+
 df_other = heatatmdf[['atom_number', 'x_coord', 'y_coord', 'z_coord']].copy()
 df_other.columns = ['Atom', 'X', 'Y', 'Z']
+df_other['OXYGEN'] = np.nan
+for index, row in heatatmdf.iterrows():
+    if heatatmdf['atom_name'][index] == 'O':
+        df_other['OXYGEN'][index] = True
+    else:
+        df_other['OXYGEN'][index] = False
 df_other.to_csv('3IE9.extra_info', sep='\t')
-#print(df_other)
+print(df_other)
 
 
 
