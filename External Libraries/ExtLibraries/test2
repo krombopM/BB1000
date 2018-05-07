@@ -1,0 +1,48 @@
+
+import numpy as np
+import pandas as pd
+
+data = open('3IE9.pdb','r')
+new_file = open('3IE9.extra_info', 'w')
+df = []
+for line in data.readlines():
+    if 'HETATM' in line:
+        df.append(line)
+new_dataframe = []
+for item in df:
+    line = item.split()
+    line[0] = line[-1]
+    if line[-1] == "O":
+        line[-1] = True
+    else:
+        line[-1] = False
+    del line[9:11]
+    del line[1:6]
+    new_dataframe.append(line)
+del new_dataframe[0]
+df_other = pd.DataFrame(new_dataframe)
+df_other.columns = ['Atom', 'X', 'Y', 'Z', 'OXY']
+df_other.to_csv("3IE9.extra_info", sep=" ", index=False)
+#print(df_other)
+
+
+
+
+
+'''
+ppdb  = pd.read_csv('3IE9.pdb')
+new_file = open('3IE9.extra_info', 'w')
+heatatmdf = ppdb.df['HETATM']
+
+df_other = heatatmdf[['atom_number', 'x_coord', 'y_coord', 'z_coord']].copy()
+df_other.columns = ['Atom', 'X', 'Y', 'Z']
+df_other['OXYGEN'] = np.nan
+for index, row in heatatmdf.iterrows():
+    if heatatmdf['atom_name'][index] == 'O':
+        df_other['OXYGEN'][index] = True
+    else:
+        df_other['OXYGEN'][index] = False
+df_other.to_csv('3IE9.extra_info', sep=' ')
+print(df_other)
+
+'''
