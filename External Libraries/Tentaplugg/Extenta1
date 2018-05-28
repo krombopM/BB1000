@@ -1,5 +1,17 @@
 
+'''
+#10 line dice simulator
+import random
 
-#Name Basic Data Types:
-#Ans = str, int, float,
-
+dice = [1,2,3,4,5,6]
+while True:
+    try:
+        inp = input('Press enter to roll: ')
+        if inp == "":
+            print(random.choice(dice))
+        else:
+            pass
+    except KeyboardInterrupt:
+        print('Thanks for playing..')
+        exit()
+'''
